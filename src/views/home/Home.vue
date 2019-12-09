@@ -4,6 +4,7 @@
     <Swiper/>
     <Sort/>
     <HotShop/>
+    <Guess/>
   </div>
 </template>
 <script>
@@ -11,19 +12,17 @@ import SearchBar from './SearchBar'
 import Swiper from './Swiper'
 import Sort from './Sort'
 import HotShop from './HotShop'
+import Guess from './Guess'
 export default {
   components:{
     SearchBar,
     Swiper,
     Sort,
-    HotShop
+    HotShop,
+    Guess
   }
 }
 </script>
-<style lang='scss'>    
-  .home{
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  } 
+<style lang='scss'>
+
 </style>
