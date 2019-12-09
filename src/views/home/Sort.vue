@@ -2,83 +2,16 @@
 <div>
   <div class="sort">
     <div class="sort-list">
-      <div class="sort-one">
+      <div class="sort-one" v-for="item in sortList" :key="item.id">
         <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
+          <img :src="item.top.src" alt="">
+          <p>{{ item.top.title }}</p>
         </div>
         <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
+          <img :src="item.bottom.src" alt="">
+          <p>{{ item.bottom.title }}</p>
         </div>
       </div>  
-
-      <div class="sort-one">
-        <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
-        </div>
-        <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
-        </div>
-      </div>  
-
-   <div class="sort-one">
-        <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
-        </div>
-        <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
-        </div>
-      </div>  
-   <div class="sort-one">
-        <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
-        </div>
-        <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
-        </div>
-      </div>  
-
-   <div class="sort-one">
-        <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
-        </div>
-        <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
-        </div>
-      </div>  
-
-   <div class="sort-one">
-        <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
-        </div>
-        <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
-        </div>
-      </div>  
-
-   <div class="sort-one">
-        <div class="sort-top">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>天猫新品</p>
-        </div>
-        <div class="sort-bottom">
-          <img src="https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1" alt="">
-          <p>充值中心</p>
-        </div>
-      </div>  
-
-
 
     </div>
   </div>
@@ -90,8 +23,18 @@
 </div>
 </template>
 <script>
+import fetch from '@/api/fetch.js'
 export default {
-
+  data(){
+    return {
+      sortList:[]
+    }
+  },
+  mounted(){
+    fetch('/db/sort.json',res=>{
+      this.sortList = res.data
+    })
+  }
 }
 </script>
 <style lang='scss'>

@@ -1,0 +1,78 @@
+{
+    "err": 0,
+    "msg": "success",
+    "data": [
+        {
+            "id": 0,
+            "head": "聚划算",
+            "title": "强大额券",
+            "img": "https://img.alicdn.com/tps/O1CN01Tf3MMF1BwA6J0wfs5_!!9-2-lubanu.png_125x125q90_.webp"
+        },
+        {
+            "id": 1,
+            "head": "",
+            "title": "每日红包",
+            "img": "https://img.alicdn.com/tps/O1CN01oCupS11C324AyazLS_!!24-2-lubanu.png_125x125q90_.webp"
+        },
+        {
+            "id": 2,
+            "head": "淘宝直播",
+            "title": "限时半价",
+            "img": "https://gw.alicdn.com/imgextra/O1CN01A8YdR11ClSTrxdJoC_!!121-2-lubanu.png_125x125q90_.webp"
+        },
+        {
+            "id": 3,
+            "head": "",
+            "title": "9.9包邮",
+            "img": "https://img.alicdn.com/tps/O1CN01hma9WU2LY1aoiP0SH_!!0-juitemmedia.jpg_125x125q90_.webp"
+        },
+        {
+            "id": 4,
+            "head": "淘抢购",
+            "title": "挖深藏的店",
+            "img": "https://gw.alicdn.com/imgextra/i3/101/O1CN012bgaQi1CcIVjpDusR_!!101-2-lubanu.png_125x125q90_.webp"
+        },
+        {
+            "id": 5,
+            "head": "天天特卖",
+            "title": "",
+            "img": "https://gw.alicdn.com/imgextra/i1/150/O1CN0176XLdS1CyjuSuqlPH_!!150-0-lubanu.jpg_180x180q90_.webp"
+        },
+        {
+            "id": 6,
+            "head": "有好货",
+            "title": "强暖冬好货",
+            "img": "https://gw.alicdn.com/imgextra/i2/179/O1CN01EZWyJ81DC1RMxfmqv_!!179-2-lubanu.png_125x125q90_.webp"
+        },
+        {
+            "id": 7,
+            "head": "",
+            "title": "",
+            "img": "https://gw.alicdn.com/imgextra/i2/160/O1CN01pnH7Lq1D3JuRgnR1Y_!!160-0-lubanu.jpg_180x180q90_.webp"
+        },
+        {
+            "id": 8,
+            "head": "每日好店",
+            "title": "挖深藏的店",
+            "img": "https://gw.alicdn.com/imgextra/i4/49/O1CN01MLHrtC1CETy0FgaQV_!!49-2-lubanu.png_125x125q90_.webp"
+        },
+        {
+            "id": 9,
+            "head": "",
+            "title": "",
+            "img": "https://gw.alicdn.com/imgextra/i1/53/O1CN01HLsUCr1CGJVkPWeJD_!!53-0-lubanu.jpg_180x180q90_.webp"
+        },
+        {
+            "id": 10,
+            "head": "哇哦视频",
+            "title": "点我领福利",
+            "img": "https://gw.alicdn.com/imgextra/i4/58/TB2erwSXEz.BuNjt_bXXXcQmpXa_!!58-2-luban.png_125x125q90_.webp"
+        },
+        {
+            "id": 11,
+            "head": "",
+            "title": "",
+            "img": "https://gw.alicdn.com/imgextra/i2/152/O1CN01qIZBml1CzelccBwu1_!!152-0-lubanu.jpg_180x180q90_.webp"
+        }
+    ]
+}

@@ -3,45 +3,17 @@
   <div class="hotshop">
     <div class="hot-group">
 
-      <div class="hot-one">
-        <h2>聚划算</h2>
+      <div class="hot-one" v-for="item in shopList" :key="item.id">
+        <h2 v-if="item.head">{{ item.head }}</h2>
+        <h2 class="duble" v-else>
+          <span>双12抢福利</span>
+        </h2>
         <div>
-          <p>抢大额劵</p>
-          <img src="https://gw.alicdn.com/imgextra/i3/133/O1CN01caOb5M1CqxDpCnL3A_!!133-0-lubanu.jpg_180x180q90_.webp" alt="">
+          <p>{{ item.title}}</p>
+          <img :src="item.img" alt="">
         </div>
       </div>
 
-      <div class="hot-one">
-        <h2>聚划算</h2>
-        <div>
-          <p>抢大额劵</p>
-          <img src="https://gw.alicdn.com/imgextra/i3/133/O1CN01caOb5M1CqxDpCnL3A_!!133-0-lubanu.jpg_180x180q90_.webp" alt="">
-        </div>
-      </div>
-
-      <div class="hot-one">
-        <h2>聚划算</h2>
-        <div>
-          <p>抢大额劵</p>
-          <img src="https://gw.alicdn.com/imgextra/i3/133/O1CN01caOb5M1CqxDpCnL3A_!!133-0-lubanu.jpg_180x180q90_.webp" alt="">
-        </div>
-      </div>
-
-      <div class="hot-one">
-        <h2>聚划算</h2>
-        <div>
-          <p>抢大额劵</p>
-          <img src="https://gw.alicdn.com/imgextra/i3/133/O1CN01caOb5M1CqxDpCnL3A_!!133-0-lubanu.jpg_180x180q90_.webp" alt="">
-        </div>
-      </div>
-
-      <div class="hot-one">
-        <h2>聚划算</h2>
-        <div>
-          <p>抢大额劵</p>
-          <img src="https://gw.alicdn.com/imgextra/i3/133/O1CN01caOb5M1CqxDpCnL3A_!!133-0-lubanu.jpg_180x180q90_.webp" alt="">
-        </div>
-      </div>
     </div>
   </div>
   <div class="today-news">
@@ -52,8 +24,18 @@
 </div>
 </template>
 <script>
+import fetch from '@/api/fetch.js'
 export default {
-
+  data(){
+    return {
+      shopList:[],
+    }
+  },
+  mounted(){
+    fetch('/db/goods.json',res=>{
+      this.shopList = res.data
+    })
+  }
 }
 </script>
 <style lang='scss'>
@@ -75,11 +57,24 @@ export default {
         padding:.266667rem 0 0 .266667rem;
         h2{
           font-size:.426667rem;
+          height: .56rem;
+        }
+        .duble{  
+          color: #fff;
+          text-align: center;
+          span{
+            background: rgb(255,0,54);
+            padding:0.05rem .13333rem;
+            display: inline-block;
+            border-radius: .106667rem;
+            font-size: .266667rem;
+          }
         }
         div{
           width: 1.866667rem;
-          margin-left: .266667rem;
+          margin-left: .066667rem;
           p{
+            height: .426667rem;
             font-size: .32rem;
             margin:.066667rem 0 .106667rem 0;
             color: #f40;

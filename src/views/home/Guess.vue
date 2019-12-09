@@ -3,17 +3,18 @@
     <div class="recommend-hd">
       <img src="https://img.alicdn.com/tfs/TB1V2eQrKSSBuNjy0FlXXbBpVXa-966-114.png" alt="">
     </div>
-    <div class="recommend-item"><a class="recommend-img-wrapper triggerClick" data-index="0">
-        <img class="recommend-img lazyload" src="//gw.alicdn.com/bao/uploaded/i3/T16b5mFDpgXXXXXXXX_!!0-item_pic.jpg_500x500q90.jpg_.webp">
+    <div class="recommend-item" v-for="item in goodList" :key="item.id">
+      <a class="recommend-img-wrapper triggerClick">
+        <img class="recommend-img lazyload" :src="item.src">
       </a>
-      <a class="recommend-info triggerClick" data-index="0">
+      <a class="recommend-info triggerClick">
         <div class="recommend-title">
-          <span class="recommend-title-p">Nina出口法国 玛德琳外贸欧式复古乡村实木餐椅休闲扶手椅书桌椅</span>
+          <span class="recommend-title-p">{{ item.title }}</span>
         </div>
         <div class="recommend-price-box">
           <span class="recommend-sign recommend-h">￥</span>
-          <span class="recommend-price">999</span>
-          <span class="recommend-payed">5人已购买</span>
+          <span class="recommend-price">{{ item.price }}</span>
+          <span class="recommend-payed">{{ item.number }}人已购买</span>
         </div>
       </a>
       </div>
@@ -21,8 +22,19 @@
   </div>
 </template>
 <script>
+import fetch from '@/api/fetch.js'
 export default {
-
+  data(){
+    return {
+      goodList:[]
+    }
+  },
+  mounted(){
+    fetch('/db/like.json',res=>{
+      this.goodList = res.data
+      console.log(res.data)
+    })
+  }
 }
 </script>
 <style lang='scss'>
@@ -66,6 +78,7 @@ export default {
     border-radius: .16rem;
     overflow: hidden;
     margin: 0 .12rem;
+    margin-top: .266667rem;
     .recommend-img-wrapper{
       -webkit-box-align: center;
       height: 4.56rem;
