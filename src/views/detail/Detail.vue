@@ -26,9 +26,6 @@ export default {
     Options,
     AddCart,
     Guess
-  },
-  mounted(){
-    console.log(this.detailGood)
   }
 }
 </script>

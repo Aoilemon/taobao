@@ -21,7 +21,7 @@ const router = new VueRouter({
       component:Cart
     },
     {
-      path:'/detail',
+      path:'/detail/:id',
       component:Detail
     },
     {

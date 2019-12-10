@@ -64,10 +64,7 @@
 </template>
 <script>
 export default {
-  props:['item'],
-  mounted(){
-    console.log(this.item)
-  }
+  props:['item']
 };
 </script>
 <style lang='scss'>

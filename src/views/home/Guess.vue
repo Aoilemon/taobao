@@ -9,7 +9,7 @@
     </div>
     <div 
       class="recommend-item" 
-      v-for="item in goodList" 
+      v-for="item in good" 
       :key="item.idx" 
       @click="toDetail(item.id)"
     >
@@ -34,30 +34,39 @@ import fetch from '@/api/fetch.js'
 import Vue from 'vue'
 import { InfiniteScroll } from 'mint-ui';
 import { Indicator } from 'mint-ui';
-
+import { mapMutations } from 'vuex'
 Vue.use(InfiniteScroll);
 export default {
   data(){
     return {
       goodList:[],
       loading:false,
-      showFlag:false
+      showFlag:false,
+      detailGood:{},
+      good:[]
     }
   },
   mounted(){
-    if(this.goodList.length > 0){
-      fetch('/db/like.json',res=>{
-        this.goodList = res.data
-      })
-    }
-   
+    fetch('/db/detail.json',res=>{
+      this.goodList = res.data
+    }),
+    fetch('/db/like.json',res=>{
+      this.good = res.data
+    })
   },
   methods:{
+     ...mapMutations("xpStore",['getDetailGood']),
     toDetail(id){
-      if(this.$route.fullPath !== '/detail'){
+      if(this.$route.fullPath !== `/detail/${id}`){
         this.$emit('getId',id)
         window.location.href = "#top";
-        this.$router.push('/detail')
+        this.$router.push(`/detail/${id}`)
+
+        let detailGood = this.goodList.find((item)=>{
+          return item.id === id
+        })
+        this.detailGood = detailGood
+        this.getDetailGood(this.detailGood)
       }
     },
     loadMore(){
@@ -67,7 +76,7 @@ export default {
       setTimeout(() => {
         fetch('/db/like.json',res=>{
           let arr = res.data
-          this.goodList.push(...arr)
+          this.good.push(...arr)
           Indicator.close()
           this.loading = false
         })       

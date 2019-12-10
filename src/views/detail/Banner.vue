@@ -27,7 +27,7 @@ export default {
   props:['imgs'],
   methods:{
     goBack(){
-      this.$router.go(-2)
+      this.$router.replace('/home')
     },
     goCart(){
       this.$router.push('/cart')
