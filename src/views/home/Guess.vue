@@ -3,7 +3,7 @@
     <div class="recommend-hd">
       <img src="https://img.alicdn.com/tfs/TB1V2eQrKSSBuNjy0FlXXbBpVXa-966-114.png" alt="">
     </div>
-    <div class="recommend-item" v-for="item in goodList" :key="item.id">
+    <div class="recommend-item" v-for="item in goodList" :key="item.id" @click="toDetail">
       <a class="recommend-img-wrapper triggerClick">
         <img class="recommend-img lazyload" :src="item.src">
       </a>
@@ -32,8 +32,15 @@ export default {
   mounted(){
     fetch('/db/like.json',res=>{
       this.goodList = res.data
-      console.log(res.data)
     })
+  },
+  methods:{
+    toDetail(){
+      if(this.$route.fullPath !== '/detail'){
+        window.location.href = "#top";
+        this.$router.push('/detail')
+      }
+    }
   }
 }
 </script>
@@ -43,13 +50,10 @@ export default {
   display: flex;
   position: relative;
   box-sizing: border-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
   flex-direction: row;
   place-content: flex-start space-between;
   flex-shrink: 0;
   overflow: hidden;
-  -webkit-box-pack: justify;
   flex-wrap: wrap;
   .recommend-hd{
     width: 100%;
@@ -65,11 +69,7 @@ export default {
     position: relative;
     width: 4.56rem;
     box-sizing: border-box;
-    display: -webkit-flex;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
     flex-direction: column;
     align-content: flex-start;
     flex-shrink: 0;
@@ -80,11 +80,8 @@ export default {
     margin: 0 .12rem;
     margin-top: .266667rem;
     .recommend-img-wrapper{
-      -webkit-box-align: center;
       height: 4.56rem;
       align-items: center;
-      -webkit-box-pack: center;
-      -webkit-justify-content: center;
       justify-content: center;
       img{
         width: 4.56rem;
@@ -97,7 +94,7 @@ export default {
       text-decoration: none;
       .recommend-title{
         margin-top: .173333rem;
-        height: 1.066667rem;
+        height: 1.11rem;
         position: relative;
         overflow: hidden;
         line-height: .333333rem;
@@ -109,9 +106,6 @@ export default {
         }
       }
       .recommend-price-box{
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: row;
         flex-direction: row;
         margin-top: .16rem;
         height: .533333rem;

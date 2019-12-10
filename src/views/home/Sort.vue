@@ -85,9 +85,7 @@ export default {
     width: 100%;
     height: .533333rem;
     background-color: rgb(255, 255, 255);
-    -webkit-box-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
     align-items: center;
     div{
       width: 1.333333rem;
@@ -97,8 +95,8 @@ export default {
       border-radius: 4px;
       div{
         transform: translate(0px);
-        width: 20px;
-        height: 3px;
+        width: .533333rem;
+        height: .08rem;
         background-color: rgb(255, 109, 42);
         will-change: transform;
         border-radius: 4px;
