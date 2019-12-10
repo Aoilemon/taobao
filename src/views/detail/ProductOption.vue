@@ -42,18 +42,18 @@
                   <span></span>
                 </h2>
                 <div>
-                  <div>-</div>
+                  <div @click="changeNum('cut')">-</div>
                   <p class="btn-input">
-                    <input type="tel" value="1" />
+                    <input type="tel" :value="value" />
                   </p>
-                  <div>+</div>
+                  <div @click="changeNum('add')">+</div>
                 </div>
               </div>
             </div>
           </div>
           <div>
             <div class="sku-btns">
-              <div class="sku-btn addcart">加入购物车</div>
+              <div class="sku-btn addcart" @click="addcart">加入购物车</div>
               <div class="sku-btn gobuy">立即购买</div>
             </div>
           </div>
@@ -64,7 +64,31 @@
 </template>
 <script>
 export default {
-  props:['item']
+  props:['item'],
+  data(){
+    return {
+      value:1
+    }
+  },
+  methods:{
+    changeNum(type){
+      switch (type) {
+        case 'cut':
+          if(this.value>0){
+            this.value --
+          }
+          break;
+        case 'add':
+          this.value ++
+          break;
+        default:
+          break;
+      }
+    },
+    addcart(){
+      console.log(this.value)
+    }
+  }
 };
 </script>
 <style lang='scss'>

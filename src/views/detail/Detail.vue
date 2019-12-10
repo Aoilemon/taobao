@@ -11,11 +11,14 @@ import Banner from './Banner'
 import Options from './Options'
 import AddCart from './AddCart'
 import Guess from '../home/Guess'
-import { mapState } from 'vuex'
+import { mapState,mapMutations } from 'vuex'
+import fetch from '@/api/fetch.js'
 export default {
   data(){
     return{
-      loadmore:false
+      loadmore:false,
+      good:[],
+      detail:{}
     }
   },
   computed:{
@@ -26,6 +29,24 @@ export default {
     Options,
     AddCart,
     Guess
+  },
+  methods:{
+    ...mapMutations('xpStore',['getDetailGood'])
+    
+  },
+  mounted(){
+    fetch('/db/detail.json',res=>{
+      this.good = res.data
+      this.$nextTick(function(){
+        let id = parseInt(this.$route.params.id)
+        let detailGood = this.good.find((item)=>{
+          return item.id === id
+        })
+        this.detail = detailGood
+        this.getDetailGood(this.detail)
+      })
+    })
+
   }
 }
 </script>
