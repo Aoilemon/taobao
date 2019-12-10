@@ -1,45 +1,77 @@
 <template>
-  <div class="guess">
+  <div class="guess"
+    v-infinite-scroll="loadMore"
+    infinite-scroll-disabled="loading"
+    infinite-scroll-distance="10"
+  >
     <div class="recommend-hd">
       <img src="https://img.alicdn.com/tfs/TB1V2eQrKSSBuNjy0FlXXbBpVXa-966-114.png" alt="">
     </div>
-    <div class="recommend-item" v-for="item in goodList" :key="item.id" @click="toDetail">
-      <a class="recommend-img-wrapper triggerClick">
-        <img class="recommend-img lazyload" :src="item.src">
-      </a>
-      <a class="recommend-info triggerClick">
-        <div class="recommend-title">
-          <span class="recommend-title-p">{{ item.title }}</span>
-        </div>
-        <div class="recommend-price-box">
-          <span class="recommend-sign recommend-h">￥</span>
-          <span class="recommend-price">{{ item.price }}</span>
-          <span class="recommend-payed">{{ item.number }}人已购买</span>
-        </div>
-      </a>
+    <div 
+      class="recommend-item" 
+      v-for="item in goodList" 
+      :key="item.idx" 
+      @click="toDetail(item.id)"
+    >
+    <a class="recommend-img-wrapper triggerClick">
+      <img class="recommend-img lazyload" :src="item.src">
+    </a>
+    <a class="recommend-info triggerClick">
+      <div class="recommend-title">
+        <span class="recommend-title-p">{{ item.title }}</span>
       </div>
-      
+      <div class="recommend-price-box">
+        <span class="recommend-sign recommend-h">￥</span>
+        <span class="recommend-price">{{ item.price }}</span>
+        <span class="recommend-payed">{{ item.number }}人已购买</span>
+      </div>
+    </a>
+    </div>
   </div>
 </template>
 <script>
 import fetch from '@/api/fetch.js'
+import Vue from 'vue'
+import { InfiniteScroll } from 'mint-ui';
+import { Indicator } from 'mint-ui';
+
+Vue.use(InfiniteScroll);
 export default {
   data(){
     return {
-      goodList:[]
+      goodList:[],
+      loading:false,
+      showFlag:false
     }
   },
   mounted(){
-    fetch('/db/like.json',res=>{
-      this.goodList = res.data
-    })
+    if(this.goodList.length > 0){
+      fetch('/db/like.json',res=>{
+        this.goodList = res.data
+      })
+    }
+   
   },
   methods:{
-    toDetail(){
+    toDetail(id){
       if(this.$route.fullPath !== '/detail'){
+        this.$emit('getId',id)
         window.location.href = "#top";
         this.$router.push('/detail')
       }
+    },
+    loadMore(){
+      this.showFlag = true
+      this.loading = true
+      Indicator.open('加载中...');
+      setTimeout(() => {
+        fetch('/db/like.json',res=>{
+          let arr = res.data
+          this.goodList.push(...arr)
+          Indicator.close()
+          this.loading = false
+        })       
+      }, 1500);
     }
   }
 }

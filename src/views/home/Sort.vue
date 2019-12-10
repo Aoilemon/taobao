@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="sort">
+  <div class="sort" @scroll="evolve">
     <div class="sort-list">
       <div class="sort-one" v-for="item in sortList" :key="item.id">
         <div class="sort-top">
@@ -17,7 +17,7 @@
   </div>
   <div class="scrollbar">
     <div>
-      <div></div>
+      <div :style="{'transform': `translate(${mix}%)`}"></div>
     </div>
   </div>
 </div>
@@ -27,13 +27,21 @@ import fetch from '@/api/fetch.js'
 export default {
   data(){
     return {
-      sortList:[]
+      sortList:[],
+      mix: 0
     }
   },
   mounted(){
     fetch('/db/sort.json',res=>{
       this.sortList = res.data
     })
+  },
+  methods:{
+    evolve(e){
+      let maxScroll = e.target.scrollWidth - e.target.clientWidth
+      let nowScroll = e.target.scrollLeft
+      this.mix = Math.ceil(nowScroll/maxScroll * 150)
+    }
   }
 }
 </script>
@@ -90,11 +98,9 @@ export default {
     div{
       width: 1.333333rem;
       height: .08rem;
-      margin:auto;
       background-color: rgb(212, 216, 222);
       border-radius: 4px;
       div{
-        transform: translate(0px);
         width: .533333rem;
         height: .08rem;
         background-color: rgb(255, 109, 42);

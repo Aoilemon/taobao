@@ -2,14 +2,8 @@
   <div class="banner">
     <div class="pic-gallery-wrapper">
       <mt-swipe :auto="2000" :show-indicators="false">
-        <mt-swipe-item>
-          <img src="//img.alicdn.com/imgextra/i4/1044984142/TB28jzAxEdnpuFjSZPhXXbChpXa_!!1044984142.jpg_640x640q80_.webp" alt="">
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <img src="//img.alicdn.com/imgextra/i1/1044984142/TB2HbvFxEhnpuFjSZFEXXX0PFXa_!!1044984142.jpg_640x640q80_.webp" alt="">
-        </mt-swipe-item>
-        <mt-swipe-item>
-          <img src="//img.alicdn.com/imgextra/i4/1044984142/TB2KTOvxxtmpuFjSZFqXXbHFpXa_!!1044984142.jpg_640x640q80_.webp" alt="">
+        <mt-swipe-item v-for="(item,index) in imgs" :key="index">
+          <img :src="item" alt="">
         </mt-swipe-item>
       </mt-swipe>
     </div>
@@ -27,10 +21,10 @@
 <script>
 import Vue from 'vue'
 import { Swipe, SwipeItem } from 'mint-ui';
-
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 export default {
+  props:['imgs'],
   methods:{
     goBack(){
       this.$router.go(-2)

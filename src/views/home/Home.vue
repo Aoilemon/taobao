@@ -4,7 +4,7 @@
     <Swiper/>
     <Sort/>
     <HotShop/>
-    <Guess/>
+    <Guess @getId='getId'/>
     <NavBar/>
   </div>
 </template>
@@ -15,14 +15,39 @@ import Swiper from './Swiper'
 import Sort from './Sort'
 import HotShop from './HotShop'
 import Guess from './Guess'
+import fetch from '@/api/fetch'
+import { mapMutations } from 'vuex'
 export default {
+  data(){
+    return{
+      detail:[],
+      detailId:'',
+      detailGood:{}
+    }
+  },
   components:{
     NavBar,
     SearchBar,
     Swiper,
     Sort,
-    HotShop,
+    HotShop, 
     Guess
+  },
+  mounted(){
+    fetch('/db/detail.json',res=>{
+      this.detail = res.data
+    })
+  },
+  methods:{
+    ...mapMutations("xpStore",['getDetailGood']),
+    getId(id){
+      this.detailId = id
+      let detailGood = this.detail.find((item)=>{
+        return item.id === id
+      })
+      this.detailGood = detailGood
+      this.getDetailGood(this.detailGood)
+    }
   }
 }
 </script>

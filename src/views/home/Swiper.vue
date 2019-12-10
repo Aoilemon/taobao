@@ -22,7 +22,7 @@ export default {
     }
   },
   methods:{
-    
+
   },
   mounted(){
     fetch('/db/swiper.json',(data)=>{

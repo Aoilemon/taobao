@@ -6,7 +6,7 @@
         <div class="present-price">
           <div class="main-price-wrapper">
             <p class="o-t-price">
-              <span class="num">489</span>
+              <span class="num">{{ detailGood.price }}</span>
             </p>
             <p class="txt">
               <span>优惠价</span>
@@ -18,7 +18,7 @@
         </div>
         <div class="original-price">
           <div>
-            价格:￥<del>499</del>
+            价格:￥<del>{{ detailGood.originPrice }}</del>
           </div>
         </div>
       </div>
@@ -28,9 +28,7 @@
       <div class="tpl-wrapper-main">
         <div class="wrapper-main-left">
           <div >
-            <span>
-              北欧简约茶几马提尼边桌设简约计师款小边几 时尚摩登小茶几角几
-            </span>
+            <span>{{ detailGood.title }}</span>
           </div>
         </div>
       </div>
@@ -49,10 +47,10 @@
         <span>快递: 免运费</span>
       </div>
       <div class="sales-num">
-        <span>月销31</span>
+        <span>月销{{ detailGood.sellNum }}</span>
       </div>
       <div class="adress-city">
-        <span>广东东莞</span>
+        <span>{{ detailGood.adress }}</span>
       </div>
     </div>
     <div class="space"></div>
@@ -96,7 +94,7 @@
     </div>
     <div class="space"></div>
     <!-- 商品规格 -->
-    <div class="discount">
+    <div class="discount" @click="option">
       <div class="discount-options">
         <div class="discount-text">
           <span>规格</span>
@@ -151,12 +149,38 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div> 
+    <!-- 商品选项参数 -->
+    <div class="product">
+      <mt-popup
+        v-model="popupVisible"
+        position="bottom"
+      >
+        <ProductOption/>
+      </mt-popup>
+    </div>
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import { Popup } from 'mint-ui';
+Vue.component(Popup.name, Popup);
+import ProductOption from './ProductOption'
 export default {
-
+  props:['detailGood'],
+  data(){
+    return{
+      popupVisible:false
+    }
+  },
+  components:{
+    ProductOption
+  },
+  methods:{
+    option(){
+      this.popupVisible = !this.popupVisible
+    }
+  }
 }
 </script>
 <style lang='scss'>
