@@ -8,7 +8,8 @@
               <div class="sku-img">
                 <p>
                   <img
-                    src="//img.alicdn.com/imgextra/i2/1937033771/TB2LMWBmsyYBuNkSnfoXXcWgVXa_!!1937033771.jpg_120x120q50s150.jpg"
+                    :src="item"
+                    style="width:3.2rem"
                   />
                 </p>
               </div>
@@ -63,7 +64,10 @@
 </template>
 <script>
 export default {
-
+  props:['item'],
+  mounted(){
+    console.log(this.item)
+  }
 };
 </script>
 <style lang='scss'>

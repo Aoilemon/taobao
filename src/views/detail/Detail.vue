@@ -2,7 +2,7 @@
   <div class="detail">
     <Banner :imgs='detailGood.img'/>
     <Options :detailGood='detailGood'/>
-    <AddCart/>
+    <AddCart />
     <Guess/>
   </div>
 </template>

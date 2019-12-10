@@ -156,7 +156,7 @@
         v-model="popupVisible"
         position="bottom"
       >
-        <ProductOption/>
+        <ProductOption :item='detailGood.buyimg'/>
       </mt-popup>
     </div>
   </div>
