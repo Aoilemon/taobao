@@ -2,7 +2,7 @@
   <div class="guess"
     v-infinite-scroll="loadMore"
     infinite-scroll-disabled="loading"
-    infinite-scroll-distance="10"
+    infinite-scroll-distance="aa"
   >
     <div class="recommend-hd">
       <img src="https://img.alicdn.com/tfs/TB1V2eQrKSSBuNjy0FlXXbBpVXa-966-114.png" alt="">
@@ -43,15 +43,13 @@ export default {
       loading:false,
       showFlag:false,
       detailGood:{},
-      good:[]
+      good:[],
+      aa:20
     }
   },
   mounted(){
     fetch('/db/detail.json',res=>{
       this.goodList = res.data
-    }),
-    fetch('/db/like.json',res=>{
-      this.good = res.data
     })
   },
   methods:{
@@ -60,7 +58,7 @@ export default {
       if(this.$route.fullPath !== `/detail/${id}`){
         this.$emit('getId',id)
         window.location.href = "#top";
-        this.$router.push(`/detail/${id}`)
+        this.$router.replace(`/detail/${id}`)
 
         let detailGood = this.goodList.find((item)=>{
           return item.id === id
@@ -77,8 +75,8 @@ export default {
         fetch('/db/like.json',res=>{
           let arr = res.data
           this.good.push(...arr)
-          Indicator.close()
           this.loading = false
+          Indicator.close()
         })       
       }, 1500);
     }
