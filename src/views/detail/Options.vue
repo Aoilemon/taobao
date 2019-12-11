@@ -185,9 +185,6 @@ export default {
     option(){
       this.popupVisible = !this.popupVisible
     }
-  },
-  mounted(){
-    console.log(this.detailGood)
   }
 }
 </script>

@@ -13,7 +13,11 @@ const xpStore = {
       state.detailGood = payload
     },
     getShopCartList(state,payload){
-      state.shopCart = payload
+      let shopList = JSON.parse(localStorage.getItem('shopList'))
+      let arr = [...payload,...shopList]
+      state.shopCartList = arr
+      window.localStorage.setItem('shopList',JSON.stringify(arr))
+      console.log(state.shopCartList)
     }
   },
   actions:{

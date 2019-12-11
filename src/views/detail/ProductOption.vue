@@ -44,7 +44,7 @@
                 <div>
                   <div @click="changeNum('cut')">-</div>
                   <p class="btn-input">
-                    <input type="tel" :value="value" />
+                    <input type="tel" :value="value" @input="numChange"/>
                   </p>
                   <div @click="changeNum('add')">+</div>
                 </div>
@@ -77,11 +77,14 @@ export default {
     ...mapState('xpStore',['detailGood','shopCartList'])
   },
   methods:{
-    ...mapMutations('xpStore',['getDetailGood']),
+    ...mapMutations('xpStore',['getDetailGood','getShopCartList']),
+    numChange(e){
+      this.value = e.target.value
+    },
     changeNum(type){
       switch (type) {
         case 'cut':
-          if(this.value>0){
+          if(this.value > 1){
             this.value --
           }
           break;
@@ -102,12 +105,16 @@ export default {
       }).catch(()=>{})
 
       // 购物车商品数据存储
-      let cartGood = JSON.stringify(this.detailGood)
-      console.log(cartGood)
-
-      // cartArr.push(this.detailGood)
-      // window.localStorage.setItem('cartList',cartGood)
-      // console.log(cartArr)
+      let id = parseInt(this.$route.params.id)
+      let index = this.goodArr.findIndex(item => item.id === id)
+      let value = parseInt(this.value)
+      if (index > -1) {
+        this.goodArr[index].num += value
+      } else {
+        this.detailGood.num = value
+        this.goodArr.push(this.detailGood)
+      }
+      this.getShopCartList(this.goodArr)
     }
   }
 };
