@@ -31,6 +31,7 @@ export default {
 </script>
 <style lang='scss'>
 .CartIn{
+  overflow: hidden;
   background: #ccc;
   .CartIn-head{
     background-image: -webkit-linear-gradient(right, #FF5000 0%, #FF8400 100%);

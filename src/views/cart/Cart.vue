@@ -1,6 +1,6 @@
 <template>
   <div class="cart-page">
-      <div class="shop-car">
+      <!-- <div class="shop-car">
         <h2>购物车(0)</h2>
       </div>
       <div class="cart-center">
@@ -8,24 +8,25 @@
         <p>购物车竟然是空的</p>
         <span>再忙，也要记得买点什么犒赏自己~</span>
         <div class="btn">去逛逛</div>
-      </div>
-      <!-- <CartIn></CartIn> -->
+      </div> -->
+      <CartIn></CartIn>
       <NavBar/>
   </div>
 </template>
 <script>
-// import CartIn from './CartIn'
+import CartIn from './CartIn'
 import NavBar from '@/components/NavBar'
 import { shopCar2 } from '@/assets/index.js'
 export default {
   data:function(){
     return{
       shopCar2,
-      NavBar
+      
     }
   },
   components:{
-    // CartIn
+    CartIn,
+    NavBar
   }
 }
 </script>
@@ -36,7 +37,7 @@ export default {
     display: flex;
     padding: .533333rem .32rem 2.4rem 0rem;
     color: #fff;
-    background-image: linear-gradient(to right, #FD9126, #FF5000)
+    background-image: linear-gradient(to right, #FD9126, #FF5000);
 
     h2{
       font-size: .533333rem;
