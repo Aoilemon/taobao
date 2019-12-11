@@ -15,7 +15,7 @@
               </div>
               <div class="sku-pro-info">
                 <div>
-                  <p class="h">¥ 399-519</p>
+                  <p class="h">¥ {{buyPrice}}</p>
                   <p class="quantity">库存:984</p>
                   <p class="sku-txt">
                     <span class="c-sku"></span>
@@ -30,7 +30,7 @@
             <div>
               <h2>颜色分类</h2>
               <ul>
-                <li class="normal">白色（亏本包邮）</li>
+                <li class="normal" style="background:rgb(255,122,0);color:#fff">白色（亏本包邮）</li>
                 <li class="normal">新疆需补运费</li>
                 <li class="normal">西藏需补运费</li>
               </ul>
@@ -63,14 +63,21 @@
   </div>
 </template>
 <script>
+import { MessageBox } from 'mint-ui';
+import { mapMutations,mapState } from 'vuex'
 export default {
-  props:['item'],
+  props:['item','buyPrice'],
   data(){
     return {
-      value:1
+      value:1,
+      goodArr:[]
     }
   },
+  computed:{
+    ...mapState('xpStore',['detailGood','shopCartList'])
+  },
   methods:{
+    ...mapMutations('xpStore',['getDetailGood']),
     changeNum(type){
       switch (type) {
         case 'cut':
@@ -86,7 +93,21 @@ export default {
       }
     },
     addcart(){
-      console.log(this.value)
+      // 添加成功跳转提示选择框
+      MessageBox.confirm('添加成功，是否立即前往购物车?').
+      then(action => {
+        if(action === 'confirm'){
+          this.$router.push('/cart')
+        }
+      }).catch(()=>{})
+
+      // 购物车商品数据存储
+      let cartGood = JSON.stringify(this.detailGood)
+      console.log(cartGood)
+
+      // cartArr.push(this.detailGood)
+      // window.localStorage.setItem('cartList',cartGood)
+      // console.log(cartArr)
     }
   }
 };

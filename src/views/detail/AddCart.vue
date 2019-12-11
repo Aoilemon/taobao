@@ -23,11 +23,14 @@
   </div>
 </template>
 <script>
-import { MessageBox } from 'mint-ui';
+import { Toast } from 'mint-ui';
 export default {
   methods:{
     addcart(){
-      MessageBox('提示', '添加成功');
+      Toast({
+        message: '添加成功',
+        iconClass: 'fa fa-check'
+      });
     }
   }
 }

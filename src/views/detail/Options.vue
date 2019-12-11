@@ -156,7 +156,10 @@
         v-model="popupVisible"
         position="bottom"
       >
-        <ProductOption :item='detailGood.buyimg'/>
+        <ProductOption 
+          :item='detailGood.buyimg'
+          :buyPrice='detailGood.buyPrice'
+        />
       </mt-popup>
     </div>
   </div>
@@ -170,7 +173,9 @@ export default {
   props:['detailGood'],
   data(){
     return{
-      popupVisible:false
+      popupVisible:false,
+      isShow:'none',
+      buyPrice:0
     }
   },
   components:{
@@ -180,6 +185,9 @@ export default {
     option(){
       this.popupVisible = !this.popupVisible
     }
+  },
+  mounted(){
+    console.log(this.detailGood)
   }
 }
 </script>

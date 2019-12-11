@@ -78,7 +78,7 @@ export default {
           this.loading = false
           Indicator.close()
         })       
-      }, 1500);
+      }, 1000);
     }
   }
 }
