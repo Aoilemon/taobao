@@ -1,0 +1,26 @@
+{
+    "err":0,
+    "msg":"success",
+    "data":[
+        {
+            "src":"https://gw.alicdn.com/tfs/TB16GolmKuSBuNjy1XcXXcYjFXa-87-87.png_60x60q90_.webp",
+            "title":"代付款"
+        },
+        {
+            "src":"https://gw.alicdn.com/tfs/TB1cwzgmMmTBuNjy1XbXXaMrVXa-87-87.png_60x60q90_.webp",
+            "title":"代发货"
+        },
+        {
+            "src":"https://gw.alicdn.com/tfs/TB1b3zgmMmTBuNjy1XbXXaMrVXa-87-87.png_60x60q90_.webp",
+            "title":"待收货"
+        },
+        {
+            "src":"https://gw.alicdn.com/tfs/TB1fOKqm_tYBeNjy1XdXXXXyVXa-87-87.png_60x60q90_.webp",
+            "title":"评价"
+        },
+        {
+            "src":"https://gw.alicdn.com/tfs/TB1fMzgmMmTBuNjy1XbXXaMrVXa-87-87.png_60x60q90_.webp",
+            "title":"退款/售后"
+        }
+    ]
+}
