@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="cart-page">
       <!-- <div class="shop-car">
         <h2>购物车(0)</h2>
@@ -27,7 +27,21 @@ export default {
   components:{
     CartIn,
     NavBar
-  }
+  },
+    beforeRouteEnter (to, from, next) {
+      let res =localStorage.getItem('login')
+      if(res){
+        let isLogin=JSON.parse(res);
+        if(isLogin===true){
+          next()
+        }else{
+          next('/login')
+        }
+      }else{
+        next('/login')
+      }
+    }
+
 }
 </script>
 <style lang='scss'>

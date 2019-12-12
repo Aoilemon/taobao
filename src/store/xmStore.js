@@ -1,7 +1,13 @@
 const xmStore = {
   namespaced: true,
   state:{
-    name:"xm"
+    name:"xm",
+    user:{
+      number:'15659555997',
+      password:"123456"
+  
+    }
+ 
   },
   getter:{
 
