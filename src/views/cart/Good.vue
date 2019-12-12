@@ -2,42 +2,93 @@
   <div class="good">
        <div class="CartIn-center">
         <div class="mint-cell-title flex justify-center items-center checkbox-box">
-            <label class="mint-checklist-label checkbox-box__left">
-                <span class="mint-checkbox">
-                    <input type="checkbox" class="mint-checkbox-input" @click="isChecked">
-                        <span class="mint-checkbox-core list-style">
-                        </span>
-                </span>
-                <img :src="item.buyimg" alt="" class="img1">
-                <div class="center-title ">
-                  <span>{{ item.title }}</span>
-                  <p>白色(亏本包邮)</p>
-                  <div class="price-num">
-                    <div class="price">
-                      <span class="price1">￥{{ item.buyPrice}}</span>
+            <div class="mint-checklist-label checkbox-box__left">
+              <label>
+                <div class="mint-checkbox">
+                  <input type="checkbox" class="mint-checkbox-input" @change="isChecked" ref="box">
+                  <span class="mint-checkbox-core list-style">
+                  </span>
+                </div>
+              </label>
+              <img :src="item.buyimg" alt="" class="img1">
+              <div class="center-title ">
+                <span>{{ item.title }}</span>
+                <p>白色(亏本包邮)</p>
+                <div class="price-num">
+                  <div class="price">
+                    <span class="price1">￥{{ item.buyPrice}}</span>
+                  </div>
+                  <div class="del">
+                    <span @click="del">删除</span>
+                  </div>
+                  <div class="num">
+                    <div class="btns1">
+                      <img src="https://img.alicdn.com/tfs/TB1I05Qe1uSBuNjSsplXXbe8pXa-45-40.png?getAvatar=avatar_50x50q90_.webp" alt="" class="btn-img"
+                        @click='changeNum("cut")'
+                      >
                     </div>
-                    <div class="num">
-                      <div class="btns1">
-                        <img src="https://img.alicdn.com/tfs/TB1I05Qe1uSBuNjSsplXXbe8pXa-45-40.png?getAvatar=avatar_50x50q90_.webp" alt="" class="btn-img">
-                      </div>
-                      <input type="text" :value="item.num">
-                      <div class="btns2">
-                        <img src="https://img.alicdn.com/tfs/TB12tL6ThTpK1RjSZFKXXa2wXXa-45-40.png?getAvatar=avatar_50x50q90_.webp" alt="" class="btn-img">
-                      </div>
+                    <input type="text" :value="item.num" @input="autoNum">
+                    <div class="btns2">
+                      <img src="https://img.alicdn.com/tfs/TB12tL6ThTpK1RjSZFKXXa2wXXa-45-40.png?getAvatar=avatar_50x50q90_.webp" alt="" class="btn-img"
+                        @click='changeNum("add")'
+                      >
                     </div>
                   </div>
                 </div>
-            </label>
+              </div>
+            </div>
           </div> 
       </div>
   </div>
 </template>
 <script>
 export default {
-  props:['item'],
+  props:['item','type','allChecked'],
+  data(){
+    return{
+      checkedGoods:[],
+      num:null
+    }
+  },
   methods:{
     isChecked(e){
-      console.log(e.target.checked)
+      this.$emit('selGoods',{
+        type:e.target.checked,
+        goods:this.item,
+      })
+    },
+    del(){
+      this.$emit('del',this.item)
+    },
+    changeNum(type){
+      switch (type) {
+        case 'cut':
+            if(this.item.num <= 1){
+              this.$emit('del',this.item)
+            }else{
+              this.item.num --
+            }
+          break;
+        case 'add':
+            this.item.num ++
+          break;
+        default:
+          break;
+      }
+    },
+    autoNum(e){
+      this.num = e.target.value
+    }
+  },
+  watch:{
+    type(){
+      this.$refs['box'].checked = this.allChecked
+    },
+    num(){
+      this.$emit('changeNum',{
+        item:this.item,
+        num:this.num
+      })
     }
   }
 }
@@ -92,10 +143,6 @@ export default {
             width: 5.786667rem;
             height: .853333rem;
             font-size: .346667rem;
-            // background: #999999;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
             overflow: hidden;
             margin-bottom: .2rem;
             color: #999999;
@@ -109,20 +156,32 @@ export default {
           width: 100%;
           display: flex;
           align-items: center;
+        .del{
+          line-height: 0.98rem;
+          border: 1px solid #999;
+          border-radius: .566667rem;
+          color: red;
+          span{
+            display: flex;
+            width: 1.6rem;
+            justify-content: center;
+            margin: 0;
+          }
+        } 
         .price{
-          width: 2.453333rem;
-          height: .44rem;
+          padding:0 .266667rem;
           .price1{
             font-size: .373333rem;
             color: #ff5500;
-          } 
+            margin: 0;
+            line-height: 0.98rem;
+          }
         }
         .num{
           display: flex;
           align-items: center;
+          margin-left: .266667rem;
           .btns1{
-            // width: .8rem;
-            // height: .933333rem; 
             .btn-img{
               width: .586667rem;
               height: .586667rem;

@@ -1,30 +1,36 @@
 <template>
   <div class="count">
        <div class="mint-cell-title flex justify-center items-center">
-            <label class="mint-checklist-label  labels">
-                <span class="mint-checkbox all-check">
-                    <input type="checkbox" class="mint-checkbox-input" @change="allChecked">
-                        <span class="mint-checkbox-core choose">
-                        </span>
-                        全选
-                </span>
+            <div class="mint-checklist-label  labels">
+                <label class="allcheck">
+                    <span class="mint-checkbox all-check">
+                        <input type="checkbox" class="mint-checkbox-input" @change="allChecked" :checked='allcheck' ref="delAllEle">
+                            <span class="mint-checkbox-core choose">
+                            </span>
+                            全选
+                    </span>
+                </label>
+                <span class="all-check del" @click="delAll">删除</span>
                <div class="right">
                     <div class="count-center">
                     合计:
                     <span class="price">￥{{ totalPrice }}</span>
                     </div>
-                    <span class="howmuch">结算(0)</span>
+                    <span class="howmuch">结算({{count}})</span>
                </div>
-            </label>
+            </div>
           </div> 
   </div>
 </template>
 <script>
 export default {
-    props:['totalPrice'],
+    props:['totalPrice','allcheck','count'],
     methods:{
         allChecked(e){
-            console.log(e.target.checked)
+            this.$emit('changeAllChecked',e.target.checked)
+        },
+        delAll(){
+            this.$emit('delAll',this.$refs['delAllEle'].checked)
         }
     }
 }
@@ -45,7 +51,10 @@ export default {
             align-items:center;
             justify-content: space-between;
             //  background: #FFFFFF;
-
+            .allcheck{
+                height: 100%;
+                display: flex;
+            }
         }
         .choose{
             margin-top: -0.066667rem;
@@ -59,7 +68,15 @@ export default {
             font-size: .32rem;
             align-items: center;
         }
-       
+        .del{
+            margin-left:1rem;
+            color:red;
+            font-size:0.37777rem;
+            border:1px solid #999;
+            padding: .233333rem .36rem;
+            line-height:normal;
+            border-radius: .566667rem;
+        }
      
         .right{
             margin-right: .5rem;

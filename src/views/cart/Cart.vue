@@ -9,7 +9,7 @@
         <img  :src="shopCar2.src" alt="">
         <p>购物车竟然是空的</p>
         <span>再忙，也要记得买点什么犒赏自己~</span>
-        <div class="btn">去逛逛</div>
+        <div class="btn" @click="goHome">去逛逛</div>
       </div>
     </div> 
     <NavBar/>
@@ -34,7 +34,10 @@ export default {
     ...mapState('xpStore',['shopCartList'])
   },
   methods:{
-    ...mapMutations('xpStore',['updateCartList'])
+    ...mapMutations('xpStore',['updateCartList']),
+    goHome(){
+      this.$router.push('/home')
+    }
   },
   mounted(){
     let payload = JSON.parse(localStorage.getItem('shopList'))
@@ -48,7 +51,7 @@ export default {
   width: 100%;
   height: 100%;
   background: rgb(244,244,244);
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   .shop-car{
     display: flex;
     padding: .533333rem .32rem 2.4rem 0rem;

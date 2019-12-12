@@ -1,7 +1,6 @@
 const xpStore = {
   namespaced: true,
   state:{
-    name:"xp",
     detailGood:{},
     shopCartList:[],
     addGoods:[]
@@ -39,6 +38,10 @@ const xpStore = {
     },
     updateCartList(state,payload){
       state.shopCartList = payload
+    },
+    updateCartGoods(state,payload){
+      state.shopCartList = payload
+      window.localStorage.setItem('shopList',JSON.stringify(payload))
     }
   },
   actions:{
