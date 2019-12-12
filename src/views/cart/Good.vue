@@ -4,23 +4,23 @@
         <div class="mint-cell-title flex justify-center items-center checkbox-box">
             <label class="mint-checklist-label checkbox-box__left">
                 <span class="mint-checkbox">
-                    <input type="checkbox" class="mint-checkbox-input" >
+                    <input type="checkbox" class="mint-checkbox-input" @click="isChecked">
                         <span class="mint-checkbox-core list-style">
                         </span>
                 </span>
-                <img src="https://img.alicdn.com/bao/uploaded/i4/1608558763/O1CN01smFxP22EbVDnvLBaD_!!1608558763.jpg_190x190q90_.webp" alt="" class="img1">
+                <img :src="item.buyimg" alt="" class="img1">
                 <div class="center-title ">
-                  <span>直降1270华为mate30pro5G版HUAWEI HUAWEI Mate 30 Pro手机保时捷</span>
-                  <p>Mate30 Pro【8G运行】亮黑色[4G版 顺丰当天发];中国大陆;官方标配;256GB</p>
+                  <span>{{ item.title }}</span>
+                  <p>白色(亏本包邮)</p>
                   <div class="price-num">
                     <div class="price">
-                      <span class="price1">520</span>
+                      <span class="price1">￥{{ item.buyPrice}}</span>
                     </div>
                     <div class="num">
                       <div class="btns1">
                         <img src="https://img.alicdn.com/tfs/TB1I05Qe1uSBuNjSsplXXbe8pXa-45-40.png?getAvatar=avatar_50x50q90_.webp" alt="" class="btn-img">
                       </div>
-                      <input type="text" value="0">
+                      <input type="text" :value="item.num">
                       <div class="btns2">
                         <img src="https://img.alicdn.com/tfs/TB12tL6ThTpK1RjSZFKXXa2wXXa-45-40.png?getAvatar=avatar_50x50q90_.webp" alt="" class="btn-img">
                       </div>
@@ -34,23 +34,38 @@
 </template>
 <script>
 export default {
-
+  props:['item'],
+  methods:{
+    isChecked(e){
+      console.log(e.target.checked)
+    }
+  }
 }
 </script>
 <style lang='scss' >
 .good{
   .CartIn-center{
-    background:white;
+    background:rgb(247,247,247);
+    border-radius: .266667rem;
     .checkbox-box{
       width: 9.333333rem;
       height: 4.266667rem;
       margin: 0 auto;
-      border-top: 1px #FF5000 solid;
-      // margin:  .266667rem 0;
+      // border-top: 1px #FF5000 solid;
+      margin-bottom: .266667rem;
+      .mint-checkbox{
+        margin-top: .4rem;
+      }
+      img{
+        margin-top: .4rem;
+      }
       .checkbox-box__left{
         width: 9.333333rem;
         height: 4.266667rem;
         display: flex; 
+        padding: 0;
+        background: #fff;
+        border-radius: .266667rem;
       }
     }
       .mint-checkbox-core{
@@ -71,6 +86,7 @@ export default {
             -webkit-line-clamp: 2;
             overflow: hidden;
             margin-bottom: .3rem;
+            margin-top: .3rem;
           }
           p{
             width: 5.786667rem;
@@ -124,10 +140,11 @@ export default {
           }
           input{
             width: 1.066667rem;
-            height: .33333rem;
+            height: .63333rem;
             border: none;
             text-align: center;
             line-height: .33333rem;
+            margin: 0 .133333rem;
           }
         }
           .Settlement{

@@ -33,7 +33,7 @@ components:{
 .search-bar-page{ 
   background: rgb(245,245,245);
   overflow: hidden;
-   
+  padding-bottom: 1.6rem;
   .search-box{
     width: 9.36rem;
     height: .72rem;

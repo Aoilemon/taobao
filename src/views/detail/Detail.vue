@@ -18,7 +18,7 @@ export default {
     return{
       loadmore:false,
       good:[],
-      detail:{}
+      detail:{},
     }
   },
   computed:{

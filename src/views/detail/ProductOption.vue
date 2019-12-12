@@ -77,7 +77,7 @@ export default {
     ...mapState('xpStore',['detailGood','shopCartList'])
   },
   methods:{
-    ...mapMutations('xpStore',['getDetailGood','getShopCartList']),
+    ...mapMutations('xpStore',['getDetailGood','getShopCartList','addCart']),
     numChange(e){
       this.value = e.target.value
     },
@@ -115,6 +115,7 @@ export default {
         this.goodArr.push(this.detailGood)
       }
       this.getShopCartList(this.goodArr)
+      this.addCart(this.goodArr)
     }
   }
 };

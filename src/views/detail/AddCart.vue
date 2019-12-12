@@ -17,21 +17,38 @@
         <span class="btn-title">加入购物车</span>
       </div>
       <div class="bottom-bar-btn buy btn-pos-right ">
-        <span class="btn-title">立即购买</span>
+        <span class="btn-title" >立即购买</span>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { Toast } from 'mint-ui';
+import { Toast } from 'mint-ui'
+import { mapState,mapMutations } from 'vuex'
 export default {
+  data(){
+    return {
+      val:''
+    }
+  },
+  computed:{
+    ...mapState('xpStore',['addGoods'])
+  },
   methods:{
+    ...mapMutations('xpStore',['getShopCartList']),
     addcart(){
+      // 添加成功提示框
       Toast({
         message: '添加成功',
         iconClass: 'fa fa-check'
-      });
+      })
+      // 触发Mutations里的方法
+      this.getShopCartList(this.addGoods)
+      console.log(this.addGoods)
+
     }
+  },
+  mounted(){
   }
 }
 </script>
