@@ -45,14 +45,9 @@ const xpStore = {
     },
     updateSummaryList(state,payload){
       let summaryArr = JSON.parse(localStorage.getItem('summary'))
-
       summaryArr = summaryArr || []
       state.summaryList = payload ? summaryArr.concat(payload) : summaryArr
-
-      console.log(summaryArr,payload,state.summaryList)
-
-      localStorage.setItem('summary',JSON.stringify(state.summaryList))
-      
+      localStorage.setItem('summary',JSON.stringify(state.summaryList)) 
     }
   },
   actions:{

@@ -54,7 +54,7 @@
           <div>
             <div class="sku-btns">
               <div class="sku-btn addcart" @click="addcart">加入购物车</div>
-              <div class="sku-btn gobuy">立即购买</div>
+              <div class="sku-btn gobuy" @click="nowBuy">立即购买</div>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default {
     ...mapState('xpStore',['detailGood','shopCartList'])
   },
   methods:{
-    ...mapMutations('xpStore',['getDetailGood','getShopCartList','addCart']),
+    ...mapMutations('xpStore',['getDetailGood','getShopCartList','addCart','updateSummaryList']),
     numChange(e){
       this.value = e.target.value
     },
@@ -116,6 +116,12 @@ export default {
       }
       this.getShopCartList(this.goodArr)
       this.addCart(this.goodArr)
+    },
+    nowBuy(){
+      MessageBox('提示', '下单成功,请在订单页面进行付款')
+      this.detailGood.num = this.value
+      let arr = [this.detailGood]
+      this.updateSummaryList(arr)
     }
   }
 };

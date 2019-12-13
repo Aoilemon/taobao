@@ -16,7 +16,7 @@
       <div class="bottom-bar-btn cart btn-pos-left" @click="addcart">
         <span class="btn-title">加入购物车</span>
       </div>
-      <div class="bottom-bar-btn buy btn-pos-right ">
+      <div class="bottom-bar-btn buy btn-pos-right" @click="addcart">
         <span class="btn-title" >立即购买</span>
       </div>
     </div>
@@ -32,23 +32,18 @@ export default {
     }
   },
   computed:{
-    ...mapState('xpStore',['addGoods'])
+    ...mapState('xpStore',['addGoods','detailGood'])
   },
   methods:{
     ...mapMutations('xpStore',['getShopCartList']),
     addcart(){
       // 添加成功提示框
       Toast({
-        message: '添加成功',
-        iconClass: 'fa fa-check'
+        message: '请选择商品参数',
       })
       // 触发Mutations里的方法
       this.getShopCartList(this.addGoods)
-      console.log(this.addGoods)
-
     }
-  },
-  mounted(){
   }
 }
 </script>

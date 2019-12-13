@@ -76,25 +76,25 @@ export default {
     Tool,
     NavBar
   },
-       beforeRouteEnter (to, from, next) {
-      let res =localStorage.getItem('login')
-      if(res){
-        let isLogin=JSON.parse(res);
-        if(isLogin===true){
-          next()
-        }else{
-          next('/login')
-        }
+  beforeRouteEnter (to, from, next) {
+    let res =localStorage.getItem('login')
+    if(res){
+      let isLogin=JSON.parse(res);
+      if(isLogin===true){
+        next()
       }else{
         next('/login')
       }
-    },
-    methods:{
-      logout(){
-        localStorage.setItem("login",'false')
-        this.$router.replace('/login')
-      }
+    }else{
+      next('/login')
     }
+  },
+  methods:{
+    logout(){
+      localStorage.setItem("login",'false')
+      this.$router.replace('/login')
+    }
+  }
 }
 </script>
 <style lang='scss'  >

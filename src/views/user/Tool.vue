@@ -25,11 +25,9 @@ export default {
         }
     },
     created(){
-        if(!this.ToolArr.length >= 0){
-            fetch('/db/tool.json',res=>{
-                this.ToolArr=res.data;
-            })
-        }
+        fetch('/db/tool.json',res=>{
+            this.ToolArr=res.data;
+        })
     }
 }
 </script>

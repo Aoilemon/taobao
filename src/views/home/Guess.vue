@@ -37,6 +37,7 @@ import { Indicator } from 'mint-ui';
 import { mapMutations } from 'vuex'
 Vue.use(InfiniteScroll);
 export default {
+  name:"Guess",
   data(){
     return {
       goodList:[],
