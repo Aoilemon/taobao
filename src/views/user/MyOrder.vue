@@ -5,7 +5,7 @@
         <div class="mytaobao-box">
             <div class="myorder-head">
                 <div class="wddd">我的订单</div>
-                <div class="ckqbdd">查看全部订单></div>
+                <div class="ckqbdd" @click="()=>{this.$router.push('/order')}">查看全部订单></div>
             </div>
             <!-- 横线 -->
             <div class="aline"></div>
