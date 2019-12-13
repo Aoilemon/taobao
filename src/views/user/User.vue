@@ -9,7 +9,7 @@
           <img src="http://gw.alicdn.com/sns_logo/i3/O1CN011wTZFHNZJSCYVD1_!!0-mytaobao.jpg_100x100q90_.webp" alt="">
         </div>
         <!-- 昵称 -->
-        <span class="vipname">塞林木</span>
+        <span class="vipname">木大木大木大</span>
         <!-- 右边小图标 -->
         <div class="user-page-icon">
           <!-- 第一个小图标的盒子 -->
@@ -56,6 +56,8 @@
     </div>
     <MyOrder></MyOrder>
     <Tool></Tool>
+    <mt-button type="danger" @click="logout" class="btnsss">退出登录</mt-button>
+
     <NavBar/>
   </div>
 </template>
@@ -73,11 +75,33 @@ export default {
     MyOrder,
     Tool,
     NavBar
-  }
+  },
+       beforeRouteEnter (to, from, next) {
+      let res =localStorage.getItem('login')
+      if(res){
+        let isLogin=JSON.parse(res);
+        if(isLogin===true){
+          next()
+        }else{
+          next('/login')
+        }
+      }else{
+        next('/login')
+      }
+    },
+    methods:{
+      logout(){
+        localStorage.setItem("login",'false')
+        this.$router.replace('/login')
+      }
+    }
 }
 </script>
 <style lang='scss'  >
+
   .user-page{
+    background: rgb(242,242,242);
+    padding-bottom: 1.066667rem;
     .user-page-user{
       display: flex;
       overflow: hidden;
@@ -243,5 +267,17 @@ export default {
       margin-top: 0px;
       flex-direction: column;
     }
+    .mint-button-text{
+      display: block;
+      padding: 0 12px;
+      margin: 0 auto;
+    }
+    .btnsss{
+      margin: 0 auto;
+      display: block;
+      margin-top: 1rem;
+      background-image: linear-gradient(to right, #FD9126, #FF5000);
+    }
+
   }
 </style>

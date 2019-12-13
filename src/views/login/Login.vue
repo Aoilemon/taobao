@@ -9,12 +9,12 @@
       <div class="am-list">
           <div class="am-list-item">
             <div class="am-list-control">
-                <input type="text" name="" id="" placeholder="手机号/邮箱/会员名" class="am-input-required">
+                <input type="text" name="" id="" placeholder="手机号/邮箱/会员名" class="am-input-required" v-model="zhanghao" @blur="checking"> 
             </div>
           </div>
           <div class="am-list-item">
             <div class="am-list-control">
-                <input type="password" name="" id="" placeholder="请输入密码" class="am-input-required">
+                <input type="password" name="" id="" placeholder="请输入密码" class="am-input-required" v-model="mima" >
             </div>
           </div>
           <div class="am-footer">
@@ -22,14 +22,61 @@
               <span class="am-footer__right">免费注册</span>
           </div>
           <div class="am-fieldBottom">
-              <button class="am-button-submit am-button" type="submit">登录</button>
+              <button class="am-button-submit am-button" type="submit" @touchstart="login" >登录</button>
           </div>
       </div>
   </div>
 </template>
 <script>
+import { MessageBox } from 'mint-ui';
+import {mapState} from "vuex"
 export default {
+    data:function(){
+        return{
+            zhanghao:'',
+            mima:''
+        }
+    },
+      computed:{
+        ...mapState('xmStore',['user'])
+    },
+    methods:{
+        // 登录验证
+        login(){
+       
+            let username = this.zhanghao;
+            let password = this.mima;
+            if(this.user.number===username&&this.user.password==password){
+                localStorage.setItem('login','true')
+                    this.$toast({
+                        message:'登录成功',
+                        duration:1500
+                    })
+            setTimeout(()=>{
+                this.$router.replace('/')
+            },1500)
+            }else{
+               this.$toast({
+                        message:'账号或者密码错误',
+                        duration:0
+                    })
+            }
 
+          
+        },
+        // 手机号验证
+        checking(){
+            let phone = /^1[34578]\d{9}$/
+            let str = this.zhanghao
+            if(phone.test(str)){
+                return
+            }else{
+                MessageBox('提示', '账号或者密码错误')
+                this.zhanghao= ''
+            }
+        }
+    },
+  
 }
 </script>
 <style lang='scss' >

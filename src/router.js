@@ -7,6 +7,7 @@ import Cart from '@/views/cart/Cart'
 import Detail from '@/views/detail/Detail'
 import Order from '@/views/order/Order'
 import User from '@/views/user/User'
+import Login from '@/views/login/Login'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,10 @@ const router = new VueRouter({
     {
       path:'/',
       redirect:'/home'
+    },
+    {
+      path:'/login',
+      component:Login
     }
   ]
 })

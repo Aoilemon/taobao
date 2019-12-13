@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div class="cart-page">
     <CartIn v-if="shopCartList && shopCartList.length > 0" :total='shopCartList.length'></CartIn>
     <div v-else>
@@ -42,7 +42,21 @@ export default {
   mounted(){
     let payload = JSON.parse(localStorage.getItem('shopList'))
     this.updateCartList(payload)
+  },
+  beforeRouteEnter (to, from, next) {
+    let res =localStorage.getItem('login')
+    if(res){
+      let isLogin=JSON.parse(res);
+      if(isLogin===true){
+        next()
+      }else{
+        next('/login')
+      }
+    }else{
+      next('/login')
+    }
   }
+
 }
 </script>
 <style lang='scss'>

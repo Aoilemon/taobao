@@ -25,9 +25,11 @@ export default {
         }
     },
     created(){
-        fetch('/db/tool.json',res=>{
-            this.ToolArr=res.data;
-        })
+        if(!this.ToolArr.length >= 0){
+            fetch('/db/tool.json',res=>{
+                this.ToolArr=res.data;
+            })
+        }
     }
 }
 </script>
@@ -40,7 +42,7 @@ export default {
     left: 0rem;
     top: 0rem;
     background: #f2f2f2;
-    padding-bottom: 3rem;
+    // padding-bottom: 3rem;
 
     .tool-page-box{
         display: flex;

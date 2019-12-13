@@ -37,6 +37,19 @@ export default {
   },
   mounted(){
     this.updateSummaryList()
+  },
+  beforeRouteEnter (to, from, next) {
+    let res =localStorage.getItem('login')
+    if(res){
+      let isLogin=JSON.parse(res);
+      if(isLogin===true){
+        next()
+      }else{
+        next('/login')
+      }
+    }else{
+      next('/login')
+    }
   }
   
 }
