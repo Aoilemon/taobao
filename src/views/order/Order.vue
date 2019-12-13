@@ -11,21 +11,33 @@
       </div>
     </div>
     <!-- 组件 -->
-  <OrderCard></OrderCard>
-<OrderCard></OrderCard>
-<OrderCard></OrderCard>
+    <OrderCard
+      v-for="(item,idx) in summaryList"
+      :key="idx"
+      :item='item'
+    ></OrderCard>
    
   <NavBar/>
   </div>
 </template>
 <script>
+import { mapState,mapMutations } from 'vuex'
 import NavBar from '@/components/NavBar'
 import OrderCard from'./OrderCard.vue'
 export default {
-components:{
-  OrderCard,
-  NavBar
-}
+  components:{
+    OrderCard,
+    NavBar
+  },
+  computed:{
+    ...mapState('xpStore',['summaryList'])
+  },
+  methods:{
+    ...mapMutations('xpStore',['updateSummaryList'])
+  },
+  mounted(){
+    this.updateSummaryList()
+  }
   
 }
 </script>
@@ -60,6 +72,7 @@ components:{
     height: .426667rem;
     border: none;
     margin-left: .166667rem;
+    outline: none;
   }
   .search-box-right{
     background: #ff5000;

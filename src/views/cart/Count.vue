@@ -16,21 +16,39 @@
                     合计:
                     <span class="price">￥{{ totalPrice }}</span>
                     </div>
-                    <span class="howmuch">结算({{count}})</span>
+                    <span class="howmuch" @click="summaryGoods">结算({{count}})</span>
                </div>
             </div>
           </div> 
   </div>
 </template>
 <script>
+import { Toast } from 'mint-ui';
+import { mapMutations } from 'vuex'
 export default {
-    props:['totalPrice','allcheck','count'],
+    props:['totalPrice','allcheck','count','summaryGoodArr'],
     methods:{
+        ...mapMutations('xpStore',['updateSummaryList']),
         allChecked(e){
             this.$emit('changeAllChecked',e.target.checked)
         },
         delAll(){
             this.$emit('delAll',this.$refs['delAllEle'].checked)
+        },
+        summaryGoods(){
+            if(this.summaryGoodArr.length > 0){
+                Toast({
+                    message: '下单成功,请前往订单页面付款',
+                    duration: 2000
+                })
+            }else{
+                Toast({
+                    message: '未选中任何商品',
+                    duration: 2000
+                })
+            }
+            this.$emit('delAll',this.$refs['delAllEle'].checked)
+            this.updateSummaryList(this.summaryGoodArr)
         }
     }
 }

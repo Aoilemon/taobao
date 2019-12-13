@@ -3,7 +3,8 @@ const xpStore = {
   state:{
     detailGood:{},
     shopCartList:[],
-    addGoods:[]
+    addGoods:[],
+    summaryList:[]
   },
   getter:{
 
@@ -24,7 +25,6 @@ const xpStore = {
             return item.id === id
           })
           if(index > -1){
-
             shopList[index].num = item.num 
           }else{
             shopList.push(item)
@@ -42,6 +42,17 @@ const xpStore = {
     updateCartGoods(state,payload){
       state.shopCartList = payload
       window.localStorage.setItem('shopList',JSON.stringify(payload))
+    },
+    updateSummaryList(state,payload){
+      let summaryArr = JSON.parse(localStorage.getItem('summary'))
+
+      summaryArr = summaryArr || []
+      state.summaryList = payload ? summaryArr.concat(payload) : summaryArr
+
+      console.log(summaryArr,payload,state.summaryList)
+
+      localStorage.setItem('summary',JSON.stringify(state.summaryList))
+      
     }
   },
   actions:{

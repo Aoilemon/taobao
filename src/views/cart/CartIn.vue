@@ -26,9 +26,9 @@
       :totalPrice='totalPrice' 
       :allcheck='allChecked'
       :count='this.goods.length'
+      :summaryGoodArr='summaryGoodArr'
       @changeAllChecked="changeAllChecked"
       @delAll='delAll'
-
     ></count>
 
   </div>  
@@ -46,7 +46,8 @@ export default {
       goods:[],
       allChecked:false,
       idAll:false,
-      type:false
+      type:false,
+      summaryGoodArr:[]
     }
   },
   components:{
@@ -73,7 +74,6 @@ export default {
     ...mapMutations('xpStore',['updateCartGoods']),
     selGoods(good){
       // 判断并添加已选中的商品
-      console.log(this.goods)
       if(good.type){
         this.goods.push(good.goods)
       }else{
@@ -88,6 +88,7 @@ export default {
       }else{
         this.allChecked = false
       }
+      this.summaryGoodArr = this.goods
     },
     // 全选和反选
     changeAllChecked(type){
@@ -100,6 +101,7 @@ export default {
         this.goods = []
         this.type = type
       }
+      this.summaryGoodArr = this.goods
     },
     // 删除单个商品
     del(good){
@@ -135,7 +137,6 @@ export default {
   },
   watch:{
     shopCartList(){
-      console.log('aa')
       this.updateCartGoods(this.shopCartList)
     }
   }

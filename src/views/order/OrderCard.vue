@@ -1,5 +1,5 @@
 <template>
-  <div class="ordercard-page" >
+  <div class="ordercard-page" v-if="item&&item.title">
     <!-- 头部 -->
     <div class="order-head">
       <div class="head-left">
@@ -11,20 +11,20 @@
       </div> 
     </div>
     <!-- 商品 -->
-    <div class="good-center">
-      <img src="https://img.alicdn.com/imgextra/i1/TB1sBqZb2Bj_uVjSZFpXXc0SXXa_.jpg_200x200.jpg" alt="">
+    <div class="good-center" >
+      <img :src="item.buyimg" alt="">
       <div class="name-and-price">
-        <span class="names">《蜘蛛侠：英雄远征》大地影院莆田隆恒财富广场店电影票</span>
+        <span class="names">{{ item.title }}</span>
         <div class="price-num">
-          <span class="prices">￥66</span>
-          <span class="num">×1</span>
+          <span class="prices">￥{{ item.buyPrice }}</span>
+          <span class="num">×{{ item.num }}</span>
         </div>
       </div>
     </div>
     <!-- 商品价格和数量 -->
     <div class="yuan">
       <div class="shangping">共一件商品</div>
-      <div class="money">合计:￥666.66</div>
+      <div class="money">合计:￥{{ totalPrice }}</div>
     </div>
     <!-- 删除订单 -->
     <div class="btn clearfix">
@@ -33,8 +33,17 @@
   </div>
 </template>
 <script>
+import { mapMutations } from 'vuex'
 export default {
-
+  props:['item'],
+  methods:{
+    ...mapMutations('xpStore',['updateSummaryList'])
+  },
+  computed:{
+    totalPrice(){
+      return this.item.buyPrice * this.item.num
+    }
+  }
 }
 </script>
 <style lang='scss' >

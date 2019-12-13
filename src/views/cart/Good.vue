@@ -195,6 +195,7 @@ export default {
               width: .586667rem;
               height: .586667rem;
               display: inline-block;
+              margin: 0;
             }
           }
           input{
@@ -203,7 +204,6 @@ export default {
             border: none;
             text-align: center;
             line-height: .33333rem;
-            margin: 0 .133333rem;
           }
         }
           .Settlement{
